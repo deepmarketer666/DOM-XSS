@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Stored DOM XSS Lab</title>
+	<title>Stored DOM XSS Test Page</title>
+	<meta charset="UTF-8">
+	<!-- Add Content Security Policy -->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
 </head>
 <body>
-	<h1>Welcome to the Stored DOM XSS Lab</h1>
+	<h1>Stored DOM XSS Test Page</h1>
 	<form>
-		<label for="name">Name:</label>
-		<input type="text" id="name" name="name">
-		<br>
-		<label for="comment">Comment:</label>
-		<textarea id="comment" name="comment"></textarea>
-		<br>
-		<input type="submit" value="Submit Comment">
+		<label for="name">Enter your name:</label>
+		<input type="text" name="name" id="name">
+		<button type="submit" onclick="displayGreeting()">Submit</button>
 	</form>
-	<div id="comments">
-		<h2>Comments:</h2>
-		<!-- Comments will be displayed here -->
-	</div>
-	<script>
-		function submitComment() {
-			var name = document.getElementById("name").value;
-			var comment = document.getElementById("comment").value;
-			var commentSection = document.getElementById("comments");
-			var newComment = document.createElement("div");
-			newComment.innerHTML = "<strong>" + name + "</strong>: " + comment;
-			commentSection.appendChild(newComment);
-		}
-
-		document.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
-			e.preventDefault();
-			submitComment();
-		});
+	<div id="greeting"></div>
+	<!-- Load libraries -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.1/purify.min.js"></script>
+	<!-- Add Handlebars template for rendering -->
+	<script id="greeting-template" type="text/x-handlebars-template">
+		<p>Hello, {{name}}!</p>
 	</script>
+	<!-- Use Handlebars to render the greeting -->
+	<script>
+		function displayGreeting() {
+			var name = document.getElementById('name').value;
+			// Sanitize user input with DOMPurify
+			var sanitized = DOMPurify.sanitize(name);
+			// Use Handlebars to render the greeting
+			var template = document.getElementById('greeting-template').innerHTML;
+			var rendered = Handlebars.compile(template)({name: sanitized});
+			document.getElementById('greeting').innerHTML = rendered;
+		}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 </body>
 </html>
