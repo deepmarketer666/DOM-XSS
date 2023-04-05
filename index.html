@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stored DOM XSS Lab</title>
+</head>
+<body>
+	<h1>Stored DOM XSS Lab</h1>
+	<form>
+		<label for="name">Enter your name:</label>
+		<input type="text" id="name" name="name">
+		<button type="submit" onclick="storeName()">Submit</button>
+	</form>
+	<div id="greeting"></div>
+	<script>
+		function storeName() {
+			var name = document.getElementById("name").value;
+			document.getElementById("greeting").innerHTML = "Hello, " + name + "!";
+		}
+	</script>
+</body>
+</html>
