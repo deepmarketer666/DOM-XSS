@@ -23,8 +23,17 @@
 	</script>
 	<!-- Use Handlebars to render the greeting -->
 	<script>
-		function _0xafb4(){var _0x252d4f=['1287801WlAvKW','preventDefault','4HULhCM','</strong>:\x20','value','46680pmdIns','form','getElementsByTagName','146893VSXfFK','927540rXkCdb','11402883IJecMg','2300608XwyGER','name','1208105HAsThy','10txXVMS','innerHTML','35EANqyA','addEventListener','comments','getElementById'];_0xafb4=function(){return _0x252d4f;};return _0xafb4();}function _0x245a(_0x1072e9,_0x28ef18){var _0xafb433=_0xafb4();return _0x245a=function(_0x245ac9,_0x1e0dcd){_0x245ac9=_0x245ac9-0x174;var _0x246367=_0xafb433[_0x245ac9];return _0x246367;},_0x245a(_0x1072e9,_0x28ef18);}var _0x1154a3=_0x245a;(function(_0x2bab44,_0x139246){var _0x2c0963=_0x245a,_0x592a45=_0x2bab44();while(!![]){try{var _0x180579=-parseInt(_0x2c0963(0x181))/0x1*(-parseInt(_0x2c0963(0x17b))/0x2)+-parseInt(_0x2c0963(0x179))/0x3+-parseInt(_0x2c0963(0x182))/0x4+-parseInt(_0x2c0963(0x186))/0x5+parseInt(_0x2c0963(0x17e))/0x6*(-parseInt(_0x2c0963(0x175))/0x7)+-parseInt(_0x2c0963(0x184))/0x8+parseInt(_0x2c0963(0x183))/0x9*(parseInt(_0x2c0963(0x187))/0xa);if(_0x180579===_0x139246)break;else _0x592a45['push'](_0x592a45['shift']());}catch(_0x2885c3){_0x592a45['push'](_0x592a45['shift']());}}}(_0xafb4,0x50f04));function submitComment(){var _0x4b0ca6=_0x245a,_0x4f6699=document[_0x4b0ca6(0x178)](_0x4b0ca6(0x185))['value'],_0x431ece=document[_0x4b0ca6(0x178)]('comment')[_0x4b0ca6(0x17d)],_0x1c9773=document['getElementById'](_0x4b0ca6(0x177)),_0x44b84e=document['createElement']('div');_0x44b84e[_0x4b0ca6(0x174)]='<strong>'+_0x4f6699+_0x4b0ca6(0x17c)+_0x431ece,_0x1c9773['appendChild'](_0x44b84e);}document[_0x1154a3(0x180)](_0x1154a3(0x17f))[0x0][_0x1154a3(0x176)]('submit',function(_0x484a8c){var _0x3ac9cd=_0x1154a3;_0x484a8c[_0x3ac9cd(0x17a)](),submitComment();});
+		function displayGreeting() {
+			var name = document.getElementById('name').value;
+			// Sanitize user input with DOMPurify
+			var sanitized = DOMPurify.sanitize(name);
+			// Use Handlebars to render the greeting
+			var template = document.getElementById('greeting-template').innerHTML;
+			var rendered = Handlebars.compile(template)({name: sanitized});
+			document.getElementById('greeting').innerHTML = rendered;
+		}
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 </body>
 </html>
+
