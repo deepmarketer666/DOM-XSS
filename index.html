@@ -22,17 +22,7 @@
 		<p>Hello, {{name}}!</p>
 	</script>
 	<!-- Use Handlebars to render the greeting -->
-	<script>
-		function displayGreeting() {
-			var name = document.getElementById('name').value;
-			// Sanitize user input with DOMPurify
-			var sanitized = DOMPurify.sanitize(name);
-			// Use Handlebars to render the greeting
-			var template = document.getElementById('greeting-template').innerHTML;
-			var rendered = Handlebars.compile(template)({name: sanitized});
-			document.getElementById('greeting').innerHTML = rendered;
-		}
-	</script>
+	<script src="script.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 </body>
 </html>
